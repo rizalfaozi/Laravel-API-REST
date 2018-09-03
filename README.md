@@ -3,6 +3,9 @@
 Laravel Rest Api ini diperuntukan untuk membuat rest api untuk mobile app 
 rest api berupa data json menggunakan tehnology jwt
 
+laravel versi 5.6 support dengan php5
+
+
 #Install Composer
 
 composer install
