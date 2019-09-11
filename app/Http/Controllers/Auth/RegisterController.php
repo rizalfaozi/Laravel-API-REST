@@ -37,6 +37,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+
     }
 
     /**
@@ -51,8 +52,15 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'phone'   => 'required|string|max:100',
+            'religion' => 'required|string|max:150',
+            'gender' => 'required|string|max:100',
+            'brithday' => 'required|string|max:80',
         ]);
     }
+
+
+   
 
     /**
      * Create a new user instance after a valid registration.
@@ -62,9 +70,40 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        if($data['address'] =="")
+        {
+           $address = "";
+
+        }else{
+
+           $address = $data['address'];
+        }    
+
+         if($data['original_address'] =="")
+        {
+           $oriaddress = "";
+
+        }else{
+
+           $oriaddress = $data['original_address'];
+        } 
+
+
+
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
+            'address' => $address,
+            'original_address' => $oriaddress,
+            'gender' => $data['gender'],
+            'brithday' => $data['brithday'],
+            'religion' => $data['religion'],
+            'type' => 'user',
+            'status' => 1,
+            'photo' => '',
             'password' => bcrypt($data['password']),
         ]);
     }

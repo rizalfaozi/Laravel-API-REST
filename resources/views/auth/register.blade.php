@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>InfyOm Laravel Generator | Registration Page</title>
+    <title>InfyOm | Registration Page</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -24,6 +24,8 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/_all.css">
 
+    <link rel="stylesheet" href="{{ asset('AdminLTE-2.0.5/plugins/datepicker/datepicker3.css') }}">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -34,18 +36,19 @@
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="{{ url('/home') }}"><b>InfyOm </b>Generator</a>
+        <a href="{{ url('/home') }}"><b>InfyOm </b></a>
     </div>
 
     <div class="register-box-body">
-        <p class="login-box-msg">Register a new membership</p>
+        <p class="login-box-msg">Register a new Member</p>
 
         <form method="post" action="{{ url('/register') }}">
 
             {!! csrf_field() !!}
 
+        
             <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
-                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name">
+                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
 
                 @if ($errors->has('name'))
@@ -64,6 +67,75 @@
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
                 @endif
+            </div>
+
+
+            <div class="form-group has-feedback{{ $errors->has('phone') ? ' has-error' : '' }}">
+                <input type="text" class="form-control" name="phone" value="" placeholder="No WhatsApp">
+                <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+
+                 @if ($errors->has('phone'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('phone') }}</strong>
+                    </span>
+                @endif
+            </div>
+
+
+            <div class="form-group has-feedback{{ $errors->has('religion') ? ' has-error' : '' }}">
+               <select class="form-control" name="religion">
+                    <option value="">Pilih Agama</option>
+                    <option value="islam">Islam</option>
+                    <option value="budha">Budha</option>
+                    <option value="hindu">Hindu</option>
+                    <option value="kristen">Kristen</option>
+                    <option value="katolik">Katolik</option>
+                    <option value="konghucu">Kong Hu Cu</option>
+               </select>
+
+               @if ($errors->has('religion'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('religion') }}</strong>
+                    </span>
+                @endif
+            </div>
+
+            <div class="form-group has-feedback{{ $errors->has('gender') ? ' has-error' : '' }}">
+               <select class="form-control" name="gender">
+                    <option value="">Pilih Jenis Kelamin</option>
+                    <option value="pria">Pria</option>
+                    <option value="wanita">Wanita</option>
+               </select>
+
+               @if ($errors->has('gender'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('gender') }}</strong>
+                    </span>
+                @endif
+            </div>
+
+             <div class="form-group has-feedback{{ $errors->has('brithday') ? ' has-error' : '' }}">
+                <input type="text" class="form-control date" name="brithday" value="" placeholder="Tanggal Lahir">
+                <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+
+                @if ($errors->has('brithday'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('brithday') }}</strong>
+                    </span>
+                @endif
+            </div>
+
+
+             <div class="form-group has-feedback">
+              <textarea class="form-control" name="address" placeholder="Alamat Asal"></textarea>
+
+               
+            </div>
+
+             <div class="form-group has-feedback">
+              <textarea class="form-control" name="original_address" placeholder="Alamat"></textarea>
+
+               
             </div>
 
             <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
@@ -117,13 +189,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/js/adminlte.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
-
+ <script src="{{ asset('AdminLTE-2.0.5/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 <script>
     $(function () {
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             increaseArea: '20%' // optional
+        });
+
+        $('.date').datepicker({
+          autoclose: true,
+           format: 'yyyy-mm-dd'
         });
     });
 </script>
